@@ -4,5 +4,5 @@
 # import frappe
 from frappe.model.document import Document
 
-class SettingBPJS(Document):
+class testttt(Document):
 	pass
