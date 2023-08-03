@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-25 12:48:22.199331",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transaksi_antrean",
+  "antrian_saat_ini",
+  "antrian_selanjutnya",
+  "tanggal",
+  "panggil"
+ ],
+ "fields": [
+  {
+   "fieldname": "transaksi_antrean",
+   "fieldtype": "Link",
+   "label": "Transaksi Antrean",
+   "options": "Transaksi Antrean"
+  },
+  {
+   "fetch_from": "transaksi_antrean.no_antrian_saat_ini",
+   "fieldname": "antrian_saat_ini",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Antrian Saat Ini"
+  },
+  {
+   "fetch_from": "transaksi_antrean.no_antrian_selanjutnya",
+   "fieldname": "antrian_selanjutnya",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Antrian Selanjutnya"
+  },
+  {
+   "fetch_from": "transaksi_antrean.tanggal",
+   "fieldname": "tanggal",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Tanggal"
+  },
+  {
+   "fieldname": "panggil",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Panggil"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-08-03 07:38:39.695683",
+ "modified_by": "Administrator",
+ "module": "Antrean",
+ "name": "Transaksi Loket",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,233 @@
+{
+ "actions": [],
+ "allow_guest_to_view": 1,
+ "allow_rename": 1,
+ "autoname": "field:kode_booking",
+ "creation": "2023-07-25 01:16:16.987169",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_07i7p",
+  "no_bpjs",
+  "tanggalperiksa",
+  "jadwaldokterhtml",
+  "kode_booking",
+  "noantrian",
+  "angka_antrian",
+  "column_break_accny",
+  "jadwal_dokter",
+  "section_break_5sdea",
+  "data_pasien_column",
+  "nik",
+  "no_hp",
+  "no_rm",
+  "jeniskunjungan",
+  "nomorreferensi",
+  "column_break_ijqtb",
+  "kode_poli",
+  "nama_poli",
+  "kodedokter",
+  "namadokter",
+  "jampraktek",
+  "kapasitaspasien",
+  "task_list_tab",
+  "task_id",
+  "is_farmasi",
+  "column_break_el7i9",
+  "task_name",
+  "section_break_v3l6w",
+  "task_list"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_07i7p",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "no_bpjs",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No BPJS",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tanggalperiksa",
+   "fieldtype": "Date",
+   "label": "Tanggal Periksa",
+   "reqd": 1
+  },
+  {
+   "fieldname": "jadwaldokterhtml",
+   "fieldtype": "Read Only",
+   "label": "Jadwal_dokter"
+  },
+  {
+   "fieldname": "kode_booking",
+   "fieldtype": "Read Only",
+   "label": "Kode Booking",
+   "unique": 1
+  },
+  {
+   "fieldname": "noantrian",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "No Antrian"
+  },
+  {
+   "fieldname": "angka_antrian",
+   "fieldtype": "Read Only",
+   "label": "Angka Antrian"
+  },
+  {
+   "fieldname": "column_break_accny",
+   "fieldtype": "Column Break",
+   "label": "Jadwal Dokter"
+  },
+  {
+   "fieldname": "jadwal_dokter",
+   "fieldtype": "HTML",
+   "label": "Jadwal Dokter"
+  },
+  {
+   "fieldname": "section_break_5sdea",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "data_pasien_column",
+   "fieldtype": "Column Break",
+   "label": "Data Pasien"
+  },
+  {
+   "fieldname": "nik",
+   "fieldtype": "Read Only",
+   "label": "Nik"
+  },
+  {
+   "fieldname": "no_hp",
+   "fieldtype": "Read Only",
+   "label": "No HP"
+  },
+  {
+   "fieldname": "no_rm",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "No RM"
+  },
+  {
+   "description": "1 (Rujukan FKTP)\n2 (Rujukan Internal)\n3 (Kontrol)\n4 (Rujukan Antar RS)",
+   "fieldname": "jeniskunjungan",
+   "fieldtype": "Read Only",
+   "label": "Jenis Kunjungan"
+  },
+  {
+   "fieldname": "nomorreferensi",
+   "fieldtype": "Read Only",
+   "label": "Nomor Referensi"
+  },
+  {
+   "fieldname": "column_break_ijqtb",
+   "fieldtype": "Column Break",
+   "label": "Data Jadwal Dokter"
+  },
+  {
+   "fieldname": "kode_poli",
+   "fieldtype": "Read Only",
+   "label": "Kode Poli"
+  },
+  {
+   "fieldname": "nama_poli",
+   "fieldtype": "Read Only",
+   "label": "Nama Poli"
+  },
+  {
+   "fieldname": "kodedokter",
+   "fieldtype": "Read Only",
+   "label": "Kode Dokter"
+  },
+  {
+   "fieldname": "namadokter",
+   "fieldtype": "Read Only",
+   "label": "Nama Dokter"
+  },
+  {
+   "fieldname": "jampraktek",
+   "fieldtype": "Read Only",
+   "label": "Jam Praktek"
+  },
+  {
+   "fieldname": "kapasitaspasien",
+   "fieldtype": "Read Only",
+   "label": "Kapasitas pasien"
+  },
+  {
+   "fieldname": "task_list_tab",
+   "fieldtype": "Tab Break",
+   "label": "Task List"
+  },
+  {
+   "fieldname": "task_id",
+   "fieldtype": "Select",
+   "label": "Task ID",
+   "options": "1\n2\n3\n4\n5\n6\n7\n99"
+  },
+  {
+   "fieldname": "column_break_el7i9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "task_name",
+   "fieldtype": "Read Only",
+   "label": "Task Name"
+  },
+  {
+   "description": "- Alur Task Id Pasien Baru: 1-2-3-4-5 (apabila ada obat tambah 6-7)<br>\n- Alur Task Id Pasien Lama: 3-4-5 (apabila ada obat tambah 6-7)<br>\n- Sisa antrean berkurang pada task 5<br>\n- Pemanggilan antrean poli pasien muncul pada task 4<br>\n- Cek in/mulai waktu tunggu untuk pasien baru mulai pada task 1<br>\n- Cek in/mulai waktu tunggu untuk pasien lama mulai pada task 3<br>\n- Agar terdapat validasi pada sistem RS agar alur pengiriman Task Id berurutan dari awal, dan waktu Task Id yang kecil lebih dulu daripada Task Id yang besar (misal task Id 1=08.00, task Id 2= 08.05)<br>\n- jenisresep : Tidak ada/Racikan/Non racikan (jenisresep khusus untuk rs yang sudah implementasi antrean farmasi. Jika belum/tidak kolom jenisresep dapat dihilangkan)",
+   "fieldname": "section_break_v3l6w",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "task_list",
+   "fieldtype": "Table",
+   "label": "Task List",
+   "options": "Task List Detail",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_farmasi",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Buat Antrain Farmasi"
+  }
+ ],
+ "in_create": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-08-03 22:06:46.719328",
+ "modified_by": "Administrator",
+ "module": "Antrean",
+ "name": "Antrean BPJS",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

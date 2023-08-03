@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-31 23:39:51.169545",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "kode_booking",
+  "task_id",
+  "task_name",
+  "waktu",
+  "waktu_rs"
+ ],
+ "fields": [
+  {
+   "fieldname": "kode_booking",
+   "fieldtype": "Data",
+   "label": "Kode Booking",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "task_id",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Task ID"
+  },
+  {
+   "fieldname": "task_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Task Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "waktu",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Waktu",
+   "read_only": 1
+  },
+  {
+   "fieldname": "waktu_rs",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Waktu RS"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-08-03 07:38:09.060715",
+ "modified_by": "Administrator",
+ "module": "Antrean",
+ "name": "Task List Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}
