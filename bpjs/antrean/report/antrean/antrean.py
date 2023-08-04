@@ -4,7 +4,7 @@
 import frappe, json
 from frappe import _ 
 from frappe.utils import cint, flt
-from bpjs.bpjs.antrean import *
+from bpjs.api import *
 def execute(filters=None):
 	
 	# {
@@ -27,7 +27,7 @@ def execute(filters=None):
     #             "status": "Selesai dilayani"
     #         }
 	columns = [
-		{'fieldname': 'kodebooking','label': "Kode Booking",'fieldtype': 'Data'},
+		{'fieldname': 'kodebooking','label': "Kode Booking",'fieldtype': 'Link','options':'antrean-bpjs'},
 		{'fieldname': 'noantrean','label': "Nomor Antrean",'fieldtype': 'Data'},
 		{'fieldname': 'status','label': "Status",'fieldtype': 'Data'},
 		{'fieldname': 'tanggal','label': "Tanggal",'fieldtype': 'Date'},
@@ -44,7 +44,7 @@ def execute(filters=None):
 	]
 	data_store = []
 	if filters.kodebooking:
-		res = send(service ='antrean/pendaftaran/kodebooking/'+filters.kodebooking,method="GET")
+		res = sendAntrean(service ='antrean/pendaftaran/kodebooking/'+filters.kodebooking,method="GET")
 		#for x in res['message']['response']:
 		if res['response'] is not None:
 			data_store.append({
@@ -64,7 +64,7 @@ def execute(filters=None):
 				'sumberdata':res['response'][0]['sumberdata'],
 			})
 	if filters.tanggal:
-		res = send(service ='antrean/pendaftaran/tanggal/'+filters.tanggal,method="GET")
+		res = sendAntrean(service ='antrean/pendaftaran/tanggal/'+filters.tanggal,method="GET")
 		if res['response'] is not None:
 			for x in res['response']:
 				data_store.append({

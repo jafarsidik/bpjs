@@ -4,22 +4,33 @@
 frappe.ui.form.on('Antrean BPJS',{
 	refresh: function(frm) {
 		if (frm.is_new()) {
-			$(frm.fields_dict.jadwal_dokter.wrapper).html('');
+			
 			let kode_booking = generateUniqueBookingCode();
 			frm.set_value('kode_booking',kode_booking);
+			
+			frm.set_df_property('task_id', 'hidden', 1)
+			frm.set_df_property('no_bpjs', 'hidden', 1)
+			frm.set_df_property('nik', 'hidden', 1)
+			frm.set_df_property('no_hp', 'hidden', 1)
+			frm.set_df_property('jeniskunjungan', 'hidden', 1)
+			frm.set_df_property('no_rm', 'hidden', 1)
+			frm.set_df_property('pasienbaru', 'hidden', 1)
+			
 		}else{
 			frm.add_custom_button("Batal Antrian", function(){
 				frappe.msgprint(frm.doc.email);
 			}, "Aksi Antrean");
 			frm.set_df_property('tanggalperiksa', 'read_only', 1)
 			frm.set_df_property('no_bpjs', 'read_only', 1)
-			frm.set_df_property('no_bpjs', 'read_only', 1)
 			frm.set_df_property('jadwal_dokter', 'hidden', 1)
+			frm.set_df_property('task_id', 'hidden', 0)
+			frm.set_df_property('no_rm', 'hidden', 0)
+			frm.set_df_property('pasienbaru', 'hidden', 0)
 			//call GetTaskList
 			frm.refresh_field('task_list');	
 			frm.set_value('task_list','');	
 			let payload = {'kodebooking':frm.doc.kode_booking}
-			frappe.call('bpjs.bpjs.antrean.send', {
+			frappe.call('bpjs.api.sendAntrean', {
 				service: 'antrean/getlisttask',
 				method: 'POST',
 				payload:payload
@@ -39,8 +50,214 @@ frappe.ui.form.on('Antrean BPJS',{
 			});
 		}
 	},
+	jenis_pasien:function(frm){
+		frm.set_df_property('jeniskunjungan', 'hidden', 0)
+		frm.set_df_property('nik', 'hidden', 0)
+		frm.set_df_property('no_hp', 'hidden', 0)
+		frm.set_df_property('no_rm', 'hidden', 0)
+		frm.set_df_property('pasienbaru', 'hidden', 0)
+		if(frm.doc.jenis_pasien == "JKN"){
+			frm.set_df_property('no_bpjs', 'hidden', 0)
+			
+		}else if(frm.doc.jenis_pasien == "NON JKN"){
+			frm.set_df_property('no_bpjs', 'hidden', 1)
+			
+			//Call Reff Poli
+			frappe.call('bpjs.api.sendAntrean', {
+				service: 'ref/poli',
+				method: 'GET',	
+			}).then(r => {
+				let list_poli = [];
+				let field_poli = frm.get_field('kode_poli');
+				list_poli.push({label: 'Pilih', value: ''});		
+
+				$.each(r.message.response, function (index, value) {
+					let label_poli = value.nmpoli+" ("+value.kdsubspesialis+") "+value.nmsubspesialis;
+					list_poli.push({label: label_poli, value: value.kdsubspesialis});			
+				});
+				console.log(list_poli);
+				field_poli.df.options = list_poli;
+				field_poli.set_options();
+			});
+
+		}else{
+			frm.set_df_property('no_bpjs', 'hidden', 1)
+			// frm.set_df_property('nik', 'hidden', 1)
+		}
+	},
+	kode_poli: function(frm){
+		frappe.call('bpjs.api.sendAntrean', {
+			service: 'jadwaldokter/kodepoli/'+frm.doc.kode_poli+'/tanggal/'+frm.doc.tanggalperiksa,
+		 	method: 'GET',
+		}).then(r => {
+			let list_jadwal = [];
+			let field_jadwal = frm.get_field('jadwal_dokter');
+			list_jadwal.push({label: 'Pilih', value: ''});		
+
+			$.each(r.message.response, function (index, value) {
+				let jadwal_dokter_lists = value.namadokter+" "+value.jadwal+" ";
+				let gabungVal = value.kodedokter+"|"+value.namadokter+"|"+value.jadwal+"|"+value.hari+"|"+value.kapasitaspasien+"|"+value.libur;
+				list_jadwal.push({label: jadwal_dokter_lists, value: gabungVal});			
+			});
+
+			field_jadwal.df.options = list_jadwal;
+			field_jadwal.set_options();
+		})
+		
+	},
+	tanggalperiksa:function(frm){
+		if(frm.doc.jenis_pasien =="JKN"){
+			//call Data Rujukan VCLAIM
+			frappe.call('bpjs.api.sendVClaim', {
+				service: 'Rujukan/Peserta/'+frm.doc.no_bpjs,
+				method: 'GET',
+			}).then(r => {
+				if(r.message.metaData.code !== "200"){
+					frappe.show_alert({
+						title: "Verifikasi Data",
+						indicator: 'red',
+						message:r.message.metaData.message,
+					});
+				}else{
+					frm.set_value('nik',r.message.response.rujukan.peserta.nik);
+		 			frm.set_value('no_hp',removeSpacesFromString(r.message.response.rujukan.peserta.mr.noTelepon));
+				
+					
+					let poli = [];
+					let field_poli = frm.get_field('kode_poli');
+					let label_poli = r.message.response.rujukan.poliRujukan.nama+" ("+r.message.response.rujukan.poliRujukan.kode+") ";
+					poli.push({label: label_poli, value: r.message.response.rujukan.poliRujukan.kode});		
+					field_poli.df.options = poli;
+					field_poli.set_options();
+		 			
+					frm.set_value('kode_poli',r.message.response.rujukan.poliRujukan.kode);
+					frm.set_value('nama_poli',r.message.response.rujukan.poliRujukan.nama);
+		 			frm.set_value('no_rm',r.message.response.rujukan.peserta.mr.noMR);
+		 			frm.set_value('jeniskunjungan',r.message.response.rujukan.pelayanan.kode);
+		 			
+				}
+				
+			})
+		}else{
+			frm.set_value('nomorreferensi','');
+		}
+		frappe.call('bpjs.api.sendAntrean', {
+			service: 'jadwaldokter/kodepoli/'+frm.doc.kode_poli+'/tanggal/'+frm.doc.tanggalperiksa,
+			 method: 'get',
+		}).then(r => {
+			let list_jadwal = [];
+			let field_jadwal = frm.get_field('jadwal_dokter');
+			list_jadwal.push({label: 'Pilih', value: ''});		
+
+			$.each(r.message.response, function (index, value) {
+				let jadwal_dokter_lists = value.namadokter+" "+value.jadwal+" ";
+				let gabungVal = value.kodedokter+"|"+value.namadokter+"|"+value.jadwal+"|"+value.hari+"|"+value.kapasitaspasien+"|"+value.libur;
+				
+				list_jadwal.push({label: jadwal_dokter_lists, value: gabungVal});			
+			});
+
+			field_jadwal.df.options = list_jadwal;
+			field_jadwal.set_options();
+		})
+	},
+	jadwal_dokter:function(frm){
+		let val = frm.doc.jadwal_dokter
+		x = val.split("|")
+		
+		frm.set_value('kodedokter',x[0]);
+		frm.set_value('namadokter',x[1]);
+		frm.set_value('jampraktek',x[2]);
+		frm.set_value('kapasitaspasien',x[4]);
+		frm.set_value('nama_poli',frm.doc.kode_poli);
+		frappe.db.get_list('Antrean BPJS',{
+			filters: {
+				tanggalperiksa: frm.doc.tanggalperiksa,
+				kodedokter:x[0],
+				jampraktek:x[2]
+			}
+		}).then(count => {
+			let x = count.length;
+			x += 1;
+			frm.set_value('noantrian',"B-"+x);
+			frm.set_value('angka_antrian',x);
+		})
+	},
+	validate:function(frm){
+		let x_return = false;
+		if (frm.is_new()) {
+			//call api pasien
+			
+			let currentDate = Date.now();
+			let payload = {
+				"kodebooking": frm.doc.kode_booking,
+				"jenispasien": frm.doc.jenis_pasien,
+				"nomorkartu": frm.doc.no_bpjs,
+				"nik": frm.doc.nik,
+				"nohp": frm.doc.no_hp,
+				"kodepoli": frm.doc.kode_poli,
+				"namapoli": frm.doc.nama_poli,
+				"pasienbaru": 0,
+				"norm": frm.doc.no_rm,
+				"tanggalperiksa": frm.doc.tanggalperiksa,
+				"kodedokter": frm.doc.kodedokter,
+				"namadokter": frm.doc.namadokter,
+				"jampraktek": frm.doc.jampraktek,
+				"jeniskunjungan": frm.doc.jeniskunjungan,
+				"nomorreferensi": frm.doc.nomorreferensi,
+				"nomorantrean": frm.doc.noantrian,
+				"angkaantrean": frm.doc.angka_antrian,
+				"estimasidilayani": currentDate,
+				"sisakuotajkn": frm.doc.kapasitaspasien,
+				"kuotajkn": frm.doc.kapasitaspasien,
+				"sisakuotanonjkn": frm.doc.kapasitaspasien,
+				"kuotanonjkn": frm.doc.kapasitaspasien,
+				"keterangan": "Peserta harap 30 menit lebih awal guna pencatatan administrasi."
+			}
+			frappe.call('bpjs.api.sendAntrean', {
+				service: 'antrean/add',
+				method: 'POST',
+					payload:payload
+			}).then(r => {
+				if(r.message.metaData.code == "200"){
+					frappe.show_alert({
+						title: "Create Antrean BPJS",
+						indicator: 'green',
+						message:r.message.metaData.message,
+					});
+					x_return += true;
+				}else{
+					frappe.show_alert({
+						title: "Create Antrean BPJS",
+						indicator: 'red',
+						message:r.message.metaData.message,
+					});
+					x_return += false;
+				}
+			})
+			return x_return
+		}else{
+			const currentDate =  Date.now();
+			let payload={
+				"kodebooking": frm.doc.kode_booking,
+				"taskid": frm.doc.task_id,
+				"waktu": currentDate,
+				//"jenisresep": "Tidak ada/Racikan/Non racikan" ---> khusus yang sudah implementasi antrean farmasi
+			}
+			frappe.call('bpjs.api.sendAntrean', {
+				service: 'antrean/updatewaktu',
+				method: 'POST',
+				payload:payload
+			}).then(r => {
+				frappe.show_alert({
+					title: "Update Task ID",
+					indicator: 'green',
+					message:r.message.metaData.message,
+				});
+			});
+		}
+	},
 	task_id:function(frm){
-		if(frm.doc.task_id ==1){
+		if(frm.doc.task_id == 1){
 			frm.set_value('task_name',"mulai waktu tunggu admisi");
 		}
 		else if(frm.doc.task_id ==2){
@@ -66,182 +283,6 @@ frappe.ui.form.on('Antrean BPJS',{
 			frm.set_value('task_name',"tidak hadir/batal");
 		}
 	},
-	before_save:function(frm){
-		
-		if (frm.is_new()) {
-			//let currentDate = new Date().toJSON().slice(0, 10);
-			let currentDate = Date.now();
-			let payload = {
-				"kodebooking": frm.doc.kode_booking,
-				"jenispasien": "JKN",
-				"nomorkartu": frm.doc.no_bpjs,
-				"nik": frm.doc.nik,
-				"nohp": frm.doc.no_hp,
-				"kodepoli": frm.doc.kode_poli,
-				"namapoli": frm.doc.nama_poli,
-				"pasienbaru": 0,
-				"norm": frm.doc.no_rm,
-				"tanggalperiksa": frm.doc.tanggalperiksa,
-				"kodedokter": frm.doc.kodedokter,
-				"namadokter": frm.doc.namadokter,
-				"jampraktek": frm.doc.jampraktek,
-				"jeniskunjungan": frm.doc.jeniskunjungan,
-				"nomorreferensi": frm.doc.nomorreferensi,
-				"nomorantrean": frm.doc.noantrian,
-				"angkaantrean": frm.doc.angka_antrian,
-				"estimasidilayani": currentDate,
-				"sisakuotajkn": frm.doc.kapasitaspasien,
-				"kuotajkn": frm.doc.kapasitaspasien,
-				"sisakuotanonjkn": 0,
-				"kuotanonjkn": 0,
-				"keterangan": "Peserta harap 30 menit lebih awal guna pencatatan administrasi."
-			}
-			frappe.call({
-				method: 'bpjs.bpjs.antrean.send',
-				args: {
-					service: 'antrean/add',
-					method: 'POST',
-					payload:payload
-				},
-				callback: (r) => {
-					console.log(r);
-				},
-				error: (r) => {
-					frappe.show_alert(r.message.metaData.message);
-				}
-			})
-		}else{
-			const currentDate =  Date.now();
-			let payload={
-				"kodebooking": frm.doc.kode_booking,
-				"taskid": frm.doc.task_id,
-				"waktu": currentDate,
-				//"jenisresep": "Tidak ada/Racikan/Non racikan" ---> khusus yang sudah implementasi antrean farmasi
-			}
-			frappe.call('bpjs.bpjs.antrean.send', {
-				service: 'antrean/updatewaktu',
-				method: 'POST',
-				payload:payload
-			}).then(r => {
-				frappe.show_alert({
-					title: "Update Task ID",
-					indicator: 'green',
-					message:r.message.metaData.message,
-				});
-			});
-		}
-	},
-	
-	tanggalperiksa:function(frm){
-		frm.set_value('kodedokter','');
-		frm.set_value('namadokter','');
-		frm.set_value('jampraktek','');
-		frm.set_value('kapasitaspasien','');
-		frm.set_value('noantrian','');
-		frm.set_value('angka_antrian','');
-
-		frappe.call({
-			method: 'bpjs.bpjs.vclaim.send',
-			args: {
-				service: 'Rujukan/Peserta/'+frm.doc.no_bpjs,
-				method: 'get',
-			},
-		 	callback: (r) => {
-		 	
-				if(r.message.metaData.code == "200"){
-					frm.set_value('nik',r.message.response.rujukan.peserta.nik);
-					frm.set_value('no_hp',removeSpacesFromString(r.message.response.rujukan.peserta.mr.noTelepon));
-					frm.set_value('kode_poli',r.message.response.rujukan.poliRujukan.kode);
-					frm.set_value('nama_poli',r.message.response.rujukan.poliRujukan.nama);
-					frm.set_value('no_rm',r.message.response.rujukan.peserta.mr.noMR);
-					frm.set_value('jeniskunjungan',r.message.response.rujukan.pelayanan.kode);
-					frm.set_value('nomorreferensi',r.message.response.rujukan.noKunjungan);
-					//-------------------------------------------------------------
-					//call jadwal
-					$(frm.fields_dict.jadwal_dokter.wrapper).html('');
-					frappe.call('bpjs.bpjs.antrean.send', {
-						service: 'jadwaldokter/kodepoli/'+frm.doc.kode_poli+'/tanggal/'+frm.doc.tanggalperiksa,
-						method: 'GET',
-					}).then(r => {
-						let html_button = `<ul class="list-group">`;
-						$.each(r.message.response, function (index, value) {
-							html_button += `<button
-							data-namadokter="`+value.namadokter+`"
-							data-kodedokter="`+value.kodedokter+`"
-							data-jampraktek="`+value.jadwal+`"
-							data-kapasitaspasien="`+value.kapasitaspasien+`"
-							class="btn btn-xs btn-primary"
-							data-fieldtype="Button"
-							data-fieldname="cek_rujukan">
-							`+value.namadokter+` `+value.jadwal+`
-							</button>&nbsp;</br>`;
-						});
-						html_button += `</ul>`;
-						$(frm.fields_dict.jadwal_dokter.wrapper).on('click', 'button', function() {
-							let $btn = $(this);
-							let namadokter = $btn.attr('data-namadokter');
-							let kodedokter = $btn.attr('data-kodedokter');
-							let jampraktek = $btn.attr('data-jampraktek');
-							let kapasitaspasien = $btn.attr('data-kapasitaspasien');
-							frm.set_value('kodedokter',kodedokter);
-							frm.set_value('namadokter',namadokter);
-							frm.set_value('jampraktek',jampraktek);
-							frm.set_value('kapasitaspasien',kapasitaspasien);
-							//----Call No Antrian
-							frappe.db.get_list('Antrean BPJS',{
-								filters: {
-									tanggalperiksa: frm.doc.tanggalperiksa,
-									kodedokter:kodedokter,
-									jampraktek:jampraktek
-								}
-							})
-							.then(count => {
-								let x = count.length;
-								x += 1;
-								frm.set_value('noantrian',"B-"+x);
-								frm.set_value('angka_antrian',x);
-								
-							})
-							
-							
-						});
-						// frappe.show_alert({
-						// 	title: "Notifikasi",
-						// 	indicator: 'green',
-						// 	message:"Anda Memilih Dokter"+namadokter+' '+jampraktek,
-						// });
-						$(frm.fields_dict.jadwal_dokter.wrapper).html(html_button);
-						frm.refresh_field('jadwal_dokter');
-						
-						frappe.show_alert({
-							title: "Verifikasi Data",
-							indicator: 'green',
-							message:r.message.metaData.message,
-						});
-					})
-					
-				}else{
-					frappe.show_alert({
-						title: "Verifikasi Data",
-						indicator: 'red',
-						message:r.message.metaData.message,
-					});
-				}
-		 	},
-		 	error: (r) => {
-		 		// on error
-		 		frappe.show_alert({
-		 			title: "Verifikasi Data",
-		 			indicator: 'red',
-		 			message:r.message.metaData.message,
-		 		});
-		 		frappe.show_alert(r.message);
-		 	}
-		});
-		//-------------------------------------------
-		
-	},
-	
 });
 
 

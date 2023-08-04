@@ -10,23 +10,26 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_07i7p",
-  "no_bpjs",
-  "tanggalperiksa",
-  "jadwaldokterhtml",
+  "inisialisasi_column",
   "kode_booking",
+  "jenis_pasien",
+  "no_bpjs",
+  "jeniskunjungan",
+  "column_break_accny",
+  "tanggalperiksa",
+  "kode_poli",
+  "jadwal_dokter",
+  "column_break_etous",
   "noantrian",
   "angka_antrian",
-  "column_break_accny",
-  "jadwal_dokter",
   "section_break_5sdea",
   "data_pasien_column",
   "nik",
   "no_hp",
   "no_rm",
-  "jeniskunjungan",
+  "pasienbaru",
   "nomorreferensi",
   "column_break_ijqtb",
-  "kode_poli",
   "nama_poli",
   "kodedokter",
   "namadokter",
@@ -49,8 +52,7 @@
    "fieldname": "no_bpjs",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "No BPJS",
-   "reqd": 1
+   "label": "No BPJS"
   },
   {
    "fieldname": "tanggalperiksa",
@@ -59,14 +61,10 @@
    "reqd": 1
   },
   {
-   "fieldname": "jadwaldokterhtml",
-   "fieldtype": "Read Only",
-   "label": "Jadwal_dokter"
-  },
-  {
    "fieldname": "kode_booking",
    "fieldtype": "Read Only",
    "label": "Kode Booking",
+   "reqd": 1,
    "unique": 1
   },
   {
@@ -83,11 +81,11 @@
   {
    "fieldname": "column_break_accny",
    "fieldtype": "Column Break",
-   "label": "Jadwal Dokter"
+   "label": "Jadwal"
   },
   {
    "fieldname": "jadwal_dokter",
-   "fieldtype": "HTML",
+   "fieldtype": "Select",
    "label": "Jadwal Dokter"
   },
   {
@@ -101,25 +99,26 @@
   },
   {
    "fieldname": "nik",
-   "fieldtype": "Read Only",
-   "label": "Nik"
+   "fieldtype": "Data",
+   "label": "NIK"
   },
   {
    "fieldname": "no_hp",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "No HP"
   },
   {
    "fieldname": "no_rm",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "No RM"
   },
   {
    "description": "1 (Rujukan FKTP)\n2 (Rujukan Internal)\n3 (Kontrol)\n4 (Rujukan Antar RS)",
    "fieldname": "jeniskunjungan",
-   "fieldtype": "Read Only",
-   "label": "Jenis Kunjungan"
+   "fieldtype": "Select",
+   "label": "Jenis Kunjungan",
+   "options": "\n1\n2\n3\n4"
   },
   {
    "fieldname": "nomorreferensi",
@@ -133,7 +132,7 @@
   },
   {
    "fieldname": "kode_poli",
-   "fieldtype": "Read Only",
+   "fieldtype": "Select",
    "label": "Kode Poli"
   },
   {
@@ -167,10 +166,11 @@
    "label": "Task List"
   },
   {
+   "default": "0",
    "fieldname": "task_id",
    "fieldtype": "Select",
    "label": "Task ID",
-   "options": "1\n2\n3\n4\n5\n6\n7\n99"
+   "options": "0\n1\n2\n3\n4\n5\n6\n7\n99"
   },
   {
    "fieldname": "column_break_el7i9",
@@ -199,12 +199,33 @@
    "fieldtype": "Check",
    "hidden": 1,
    "label": "Buat Antrain Farmasi"
+  },
+  {
+   "fieldname": "jenis_pasien",
+   "fieldtype": "Select",
+   "label": "Jenis Pasien",
+   "options": "\nJKN\nNON JKN",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_etous",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inisialisasi_column",
+   "fieldtype": "Column Break",
+   "label": "Inisialisasi"
+  },
+  {
+   "default": "0",
+   "fieldname": "pasienbaru",
+   "fieldtype": "Check",
+   "label": "Pasien Baru"
   }
  ],
- "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-03 22:06:46.719328",
+ "modified": "2023-08-04 22:27:26.729005",
  "modified_by": "Administrator",
  "module": "Antrean",
  "name": "Antrean BPJS",

@@ -1,0 +1,114 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-08-04 06:02:08.849138",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "mode_bpjs",
+  "access_api_production_section",
+  "antrean_column",
+  "base_url_antrean",
+  "cons_id_antrean",
+  "secret_key_antrean",
+  "user_key_antrean",
+  "vclaim_column",
+  "base_url_vclaim",
+  "cons_id_vclaim",
+  "secret_key_vclaim",
+  "user_key_vclaim"
+ ],
+ "fields": [
+  {
+   "fieldname": "mode_bpjs",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Mode BPJS",
+   "options": "Production\nDevelopment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "access_api_production_section",
+   "fieldtype": "Section Break",
+   "label": "Access API Production"
+  },
+  {
+   "fieldname": "antrean_column",
+   "fieldtype": "Column Break",
+   "label": "Antrean"
+  },
+  {
+   "fieldname": "base_url_antrean",
+   "fieldtype": "Data",
+   "label": "Base URL Antrean"
+  },
+  {
+   "fieldname": "cons_id_antrean",
+   "fieldtype": "Data",
+   "label": "Cons ID Antrean"
+  },
+  {
+   "fieldname": "secret_key_antrean",
+   "fieldtype": "Data",
+   "label": "Secret Key Antrean"
+  },
+  {
+   "fieldname": "user_key_antrean",
+   "fieldtype": "Data",
+   "label": "User Key Antrean"
+  },
+  {
+   "fieldname": "vclaim_column",
+   "fieldtype": "Column Break",
+   "label": "Vclaim"
+  },
+  {
+   "fieldname": "base_url_vclaim",
+   "fieldtype": "Data",
+   "label": "Base URL VClaim"
+  },
+  {
+   "fieldname": "cons_id_vclaim",
+   "fieldtype": "Data",
+   "label": "Cons ID VClaim"
+  },
+  {
+   "fieldname": "secret_key_vclaim",
+   "fieldtype": "Data",
+   "label": "Secret Key VClaim"
+  },
+  {
+   "fieldname": "user_key_vclaim",
+   "fieldtype": "Data",
+   "label": "User Key VClaim"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-08-04 10:24:13.114254",
+ "modified_by": "Administrator",
+ "module": "Setting",
+ "name": "Setting BPJS",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

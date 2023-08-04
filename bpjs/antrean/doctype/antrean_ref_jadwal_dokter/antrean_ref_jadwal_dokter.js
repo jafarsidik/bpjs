@@ -19,7 +19,7 @@ frappe.ui.form.on('Antrean Ref Jadwal Dokter', {
 
 		//Call Reff Poli
 		frappe.call({
-			method: 'bpjs.bpjs.antrean.send',
+			method: 'bpjs.api.sendAntrean',
 			args: {
 				service: 'ref/poli',
 				method: 'GET',
@@ -39,7 +39,7 @@ frappe.ui.form.on('Antrean Ref Jadwal Dokter', {
 		frm.set_value('tanggal',frappe.datetime.nowdate())
 	},
 	poli: function(frm){
-		frappe.call('bpjs.bpjs.antrean.send', {
+		frappe.call('bpjs.api.sendAntrean', {
 			service: 'jadwaldokter/kodepoli/'+frm.doc.poli+'/tanggal/'+frm.doc.tanggal,
 		 	method: 'GET',
 		}).then(r => {

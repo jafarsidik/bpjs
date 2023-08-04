@@ -1,4 +1,4 @@
-// Copyright (c) 2023, PT IDMS and contributors
+// Copyright (c) 2023, jafar sidik and contributors
 // For license information, please see license.txt
 
 frappe.ui.form.on('Setting BPJS', {

@@ -1,4 +1,4 @@
-# Copyright (c) 2023, PT IDMS and Contributors
+# Copyright (c) 2023, jafar sidik and Contributors
 # See license.txt
 
 # import frappe
