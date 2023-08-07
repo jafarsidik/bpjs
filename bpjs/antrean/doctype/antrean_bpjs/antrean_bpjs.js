@@ -48,6 +48,8 @@ frappe.ui.form.on('Antrean BPJS',{
 				console.log(r);
 				
 			});
+			let data_qr_code = ` <img alt='QRCode Antrean BPJS' src='https://barcode.tec-it.com/barcode.ashx?data=`+frm.doc.kode_booking+`&code=QRCode&eclevel=L'/>`
+			$(frm.fields_dict.qrcode.wrapper).html(data_qr_code);
 		}
 	},
 	jenis_pasien:function(frm){

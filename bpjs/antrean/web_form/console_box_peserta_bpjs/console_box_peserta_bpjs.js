@@ -1,6 +1,6 @@
 frappe.ready(function(frm) {
 	// bind events here
-
+	
 	//Set Kode Booking
 	let kode_booking = generateUniqueBookingCode();
 	frappe.web_form.set_value('kode_booking',kode_booking);
@@ -133,6 +133,15 @@ frappe.ready(function(frm) {
 						indicator: 'green',
 						message:r.message.metaData.message,
 					});
+
+					// $("<iframe>")                             // create a new iframe element
+					// .hide()                               // make it invisible
+					// .attr("src", "printview?doctype=POS%20Invoice&name=ACC-PSINV-2023-00001&trigger_print=1&format=POS%20Invoice&no_letterhead=1&letterhead=null&_lang=en") // point the iframe to the page you want to print
+					// .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+					// const printWindow = window.open("", "_blank");
+					// printWindow.document.write('<img src="' + qrcode._el.firstChild.toDataURL() + '" />');
+					// printWindow.document.close();
+					// printWindow.print();
 					return true
 				}else{
 					frappe.show_alert({
@@ -144,33 +153,9 @@ frappe.ready(function(frm) {
 				}
 			})
 		}
-		
-			//console.log(payload);
 		//window.print();
 		//return false;
-	}	
-	//frappe.web_form.set_value('no_bpjs', 'value')
-	//frappe.web_form.after_load = function() {
-		// init script here
-		//alert("test");
-	//}
-	//Call Reff Poli
-	// frappe.call('bpjs.api.sendAntrean', {
-	// 	service: 'ref/poli',
-	// 	method: 'GET',	
-	// }).then(r => {
-	// 	let list = [];
-	// 	let field = frappe.web_form.get_field('kode_poli');
-	// 	list.push({label: 'Pilih', value: ''});		
-
-	// 	$.each(r.message.response, function (index, value) {
-	// 		let poli_lists = value.nmpoli+" ("+value.kdsubspesialis+") "+value.nmsubspesialis;
-	// 		list.push({label: poli_lists, value: value.kdsubspesialis});			
-	// 	});
-
-	// 	field.df.options = list;
-	// 	field.set_options();
-	// })
+	}
 })
 
 

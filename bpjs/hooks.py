@@ -199,4 +199,3 @@ app_license = "MIT"
 # auth_hooks = [
 #	"bpjs.auth.validate"
 # ]
-required_apps = ["erpnext"]

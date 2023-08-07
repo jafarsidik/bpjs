@@ -1,33 +1,17 @@
 # Copyright (c) 2023, jafar sidik and contributors
 # For license information, please see license.txt
 
+
 import frappe, json
 from frappe import _ 
-from frappe.utils import cint, flt
+from frappe.utils import cint, flt,today
+
 from bpjs.api import *
+
+
 def execute(filters=None):
-	
-	# {
-    #             "kodebooking": "ABC0000001",
-    #             "tanggal": "2021-03-24",
-    #             "kodepoli": "INT",
-    #             "kodedokter": 1234,
-    #             "jampraktek": "08:00-17:00",
-    #             "nik": "2749494383830001",
-    #             "nokapst": "0000000000013",
-    #             "nohp": "081234567890",
-    #             "norekammedis": "654321",
-    #             "jeniskunjungan": 1,
-    #             "nomorreferensi": "1029R0021221K000012",
-    #             "sumberdata": "Mobile JKN",
-    #             "ispeserta": 1,
-    #             "noantrean": "INT-0001",
-    #             "estimasidilayani": 1669278161000,
-    #             "createdtime": 1669278161000,
-    #             "status": "Selesai dilayani"
-    #         }
 	columns = [
-		{'fieldname': 'kodebooking','label': "Kode Booking",'fieldtype': 'Link','options':'antrean-bpjs'},
+		{'fieldname': 'kodebooking','label': "Kode Booking",'fieldtype': 'Link','options':'Antrean BPJS'},
 		{'fieldname': 'noantrean','label': "Nomor Antrean",'fieldtype': 'Data'},
 		{'fieldname': 'status','label': "Status",'fieldtype': 'Data'},
 		{'fieldname': 'tanggal','label': "Tanggal",'fieldtype': 'Date'},
@@ -83,7 +67,25 @@ def execute(filters=None):
 					'nomorreferensi':x['nomorreferensi'],
 					'sumberdata':x['sumberdata'],
 				})
-	if not filters:
-		return [], []
-	
+	if filters is not None:
+		res = sendAntrean(service ='antrean/pendaftaran/tanggal/'+today(),method="GET")
+		if res['response'] is not None:
+			for x in res['response']:
+				data_store.append({
+					'kodebooking':x['kodebooking'],
+					'noantrean':x['noantrean'],
+					'status':x['status'],
+					'tanggal':x['tanggal'],
+					'kodepoli':x['kodepoli'],
+					'kodedokter':x['kodedokter'],
+					'jampraktek':x['jampraktek'],
+					'nik':x['nik'],
+					'nokapst':x['nokapst'],
+					'nohp':x['nohp'],
+					'norekammedis':x['norekammedis'],
+					'jeniskunjungan':x['jeniskunjungan'],
+					'nomorreferensi':x['nomorreferensi'],
+					'sumberdata':x['sumberdata'],
+				})
+		
 	return columns, data_store

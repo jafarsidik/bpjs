@@ -22,6 +22,7 @@
   "column_break_etous",
   "noantrian",
   "angka_antrian",
+  "qrcode",
   "section_break_5sdea",
   "data_pasien_column",
   "nik",
@@ -221,11 +222,17 @@
    "fieldname": "pasienbaru",
    "fieldtype": "Check",
    "label": "Pasien Baru"
+  },
+  {
+   "fieldname": "qrcode",
+   "fieldtype": "HTML",
+   "label": "QR Code"
   }
  ],
+ "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-04 22:27:26.729005",
+ "modified": "2023-08-07 09:55:45.466777",
  "modified_by": "Administrator",
  "module": "Antrean",
  "name": "Antrean BPJS",
