@@ -93,5 +93,25 @@ def countAntrean(**kwargs):
 
 @frappe.whitelist(allow_guest=True)
 def testing():
-    data ={'a':'A'}
-    return data
+    data_store = []
+    res = sendAntrean(service ='antrean/pendaftaran/tanggal/2023-08-04',method="GET")
+	#for x in res['message']['response']:
+    #if res['response'] is not None:
+    for x in res['response']:
+        data_store.append({
+            'kodebooking':x['kodebooking'],
+            'noantrean':x['noantrean'],
+            'status':x['status'],
+            'tanggal':x['tanggal'],
+            'kodepoli':x['kodepoli'],
+            'kodedokter':x['kodedokter'],
+            'jampraktek':x['jampraktek'],
+            'nik':x['nik'],
+            'nokapst':x['nokapst'],
+            'nohp':x['nohp'],
+            'norekammedis':x['norekammedis'],
+            'jeniskunjungan':x['jeniskunjungan'],
+            'nomorreferensi':x['nomorreferensi'],
+            'sumberdata':x['sumberdata'],
+        })
+    return data_store

@@ -3,7 +3,7 @@
 
 frappe.ui.form.on('Antrean Ref Dokter', {
 	refresh: function(frm) {
-		frappe.call('bpjs.bpjs.antrean.send', {
+		frappe.call('bpjs.api.sendAntrean', {
 			service: 'ref/dokter',
 		 	method: 'GET',
 		}).then(r => {

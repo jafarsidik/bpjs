@@ -5,7 +5,7 @@
    "label": "Dashboard Antrean"
   }
  ],
- "content": "[{\"id\":\"QkMPwUchpk\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">BPJS</span>\",\"col\":12}},{\"id\":\"BS553GrgVu\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Dashboard Antrean\",\"col\":6}},{\"id\":\"7EnR3THuxg\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Antrean</b></span>\",\"col\":12}},{\"id\":\"S3l0GMSVFH\",\"type\":\"card\",\"data\":{\"card_name\":\"Antrean\",\"col\":4}},{\"id\":\"Mst-WWKo3h\",\"type\":\"card\",\"data\":{\"card_name\":\"Reporting Antrean\",\"col\":4}},{\"id\":\"vPacz4FHv_\",\"type\":\"card\",\"data\":{\"card_name\":\"Referensi Antrean\",\"col\":4}},{\"id\":\"YUtoJbR9yM\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"GcDOPZrsaq\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Setting</b></span>\",\"col\":12}},{\"id\":\"AYbfnWNWaH\",\"type\":\"card\",\"data\":{\"card_name\":\"Setting\",\"col\":4}}]",
+ "content": "[{\"id\":\"QkMPwUchpk\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">BPJS</span>\",\"col\":12}},{\"id\":\"BS553GrgVu\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Dashboard Antrean\",\"col\":6}},{\"id\":\"7EnR3THuxg\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Antrean</b></span>\",\"col\":12}},{\"id\":\"S3l0GMSVFH\",\"type\":\"card\",\"data\":{\"card_name\":\"Antrean\",\"col\":4}},{\"id\":\"YzNZ3_OtCb\",\"type\":\"card\",\"data\":{\"card_name\":\"Reporting\",\"col\":4}},{\"id\":\"vPacz4FHv_\",\"type\":\"card\",\"data\":{\"card_name\":\"Referensi Antrean\",\"col\":4}},{\"id\":\"YUtoJbR9yM\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"GcDOPZrsaq\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Setting</b></span>\",\"col\":12}},{\"id\":\"AYbfnWNWaH\",\"type\":\"card\",\"data\":{\"card_name\":\"Setting\",\"col\":4}}]",
  "creation": "2023-08-04 10:26:38.523653",
  "custom_blocks": [],
  "docstatus": 0,
@@ -76,24 +76,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reporting Antrean",
-   "link_count": 1,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Reporting",
-   "link_count": 0,
-   "link_to": "Antrean",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Antrean",
    "link_count": 1,
    "onboard": 0,
@@ -108,9 +90,27 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reporting",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Reporting Antrean BPJS",
+   "link_count": 0,
+   "link_to": "Antrean BPJS",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-08-04 11:07:59.800761",
+ "modified": "2023-08-05 13:06:32.065568",
  "modified_by": "Administrator",
  "module": "Setting",
  "name": "BPJS",

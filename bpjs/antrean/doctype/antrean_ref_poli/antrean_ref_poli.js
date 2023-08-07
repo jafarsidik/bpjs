@@ -5,7 +5,7 @@
 frappe.ui.form.on('Antrean Ref Poli', {
 	refresh: function(frm) {
 		
-		frappe.call('bpjs.bpjs.antrean.send', {
+		frappe.call('bpjs.api.sendAntrean', {
 			service: 'ref/poli',
 		 	method: 'GET',
 		}).then(r => {

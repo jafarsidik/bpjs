@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["Antrean"] = {
+frappe.query_reports["Antrean BPJS"] = {
 	"filters": [
 		{
             fieldname: 'kodebooking',
@@ -13,6 +13,7 @@ frappe.query_reports["Antrean"] = {
             fieldname: 'tanggal',
             label: "Tanggal",
             fieldtype: 'Date',
+            default: new Date()
         },
 	]
 };

@@ -145,8 +145,112 @@ frappe.ui.form.on('Antrean Ref Jadwal Dokter', {
 			
 		})
 	},
-	tanggal: function(){
-
+	tanggal: function(frm){
+		frappe.call('bpjs.api.sendAntrean', {
+			service: 'jadwaldokter/kodepoli/'+frm.doc.poli+'/tanggal/'+frm.doc.tanggal,
+		 	method: 'GET',
+		}).then(r => {
+			
+			let table = `<div id="t"><table class="table table-sm table-grid" id="jf"></table>Status Libur : 0=Ada, 1=Libur </div>`
+			$(frm.fields_dict.list.wrapper).html(table);
+			frm.refresh_field('list');
+			let rows = [];
+			$.each(r.message.response, function (index, value) {
+				let arr = [value.kodepoli,value.kodesubspesialis,value.kodedokter,value.namadokter,value.namahari,value.jadwal,value.kapasitaspasien,value.libur];
+				rows.push(arr)
+			})
+			const options = {
+				
+				columns: [
+					{ name: 'Kode Poli',editable: false},
+					{ name: 'Kode Subspesialis Poli',editable: false},
+					{ name: 'Kode Dokter',editable: false},
+					{ name: 'Nama Dokter',editable: false,},
+					{ name: 'Hari',editable: false,},
+					{ name: 'Jadwal',editable: false,},
+					{ name: 'Kapasitas Pasien',editable: false,},
+					{ name: 'Status Libur',editable: false,},
+					//{ name: 'Status Libur',editable: false,format:value=>`<buton class='btn btn-default btn-xs'>Upadte</button>`},
+					
+				],
+				data: rows,
+				//layout: 'fixed', // fixed, fluid, ratio
+				inlineFilters: true,
+				//dynamicRowHeight: false,
+				checkboxColumn:true,
+				//checkedRowStatus:true,
+				events: {
+					onCheckRow(row) {
+						
+						//console.log(row);
+						// your code
+						let d = new frappe.ui.Dialog({
+							title: 'Update Jadwal Dokter',
+							fields: [
+								{
+									label: 'Kode Poli',
+									fieldname: 'kodepoli',
+									fieldtype: 'Read Only',
+									default:row[2].content
+								},
+								{
+									label: 'Kode Subspesialis',
+									fieldname: 'kodesubspesialis',
+									fieldtype: 'Read Only',
+									default:row[3].content
+								},
+								{
+									label: 'Kode Dokter',
+									fieldname: 'kodedokter',
+									fieldtype: 'Read Only',
+									default:row[4].content
+								},
+								{
+									label: 'Hari',
+									fieldname: 'hari',
+									fieldtype: 'Select',
+									options: [
+										'SENIN',
+										'SELASA',
+										'RABU',
+										'KAMIS',
+										'JUMAT',
+										'SABTU',
+										'MINGGU',
+										'HARI LIBUR NASIONAL',
+									],
+									default:row[5].content
+								},
+								{
+									label: 'Jam Buka',
+									fieldname: 'buka',
+									fieldtype: 'Time'
+								},
+								{
+									label: 'Jam Tutup',
+									fieldname: 'tutup',
+									fieldtype: 'Time'
+								}
+							],
+							size: 'small', // small, large, extra-large 
+							primary_action_label: 'Submit',
+							primary_action(values) {
+								console.log(values);
+								d.hide();
+								//datatable.refresh(rows);
+							}
+						});
+						
+						d.show();
+						
+						
+					}
+				}
+			}
+			const datatable = new DataTable('#jf', options);
+			datatable.refresh(data);
+			
+		})
 	},
 	
 });
