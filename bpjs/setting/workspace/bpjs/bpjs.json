@@ -5,7 +5,7 @@
    "label": "Dashboard Antrean"
   }
  ],
- "content": "[{\"id\":\"QkMPwUchpk\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">BPJS</span>\",\"col\":12}},{\"id\":\"BS553GrgVu\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Dashboard Antrean\",\"col\":6}},{\"id\":\"7EnR3THuxg\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Antrean</b></span>\",\"col\":12}},{\"id\":\"S3l0GMSVFH\",\"type\":\"card\",\"data\":{\"card_name\":\"Antrean\",\"col\":4}},{\"id\":\"YzNZ3_OtCb\",\"type\":\"card\",\"data\":{\"card_name\":\"Reporting\",\"col\":4}},{\"id\":\"vPacz4FHv_\",\"type\":\"card\",\"data\":{\"card_name\":\"Referensi Antrean\",\"col\":4}},{\"id\":\"YUtoJbR9yM\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"GcDOPZrsaq\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Setting</b></span>\",\"col\":12}},{\"id\":\"AYbfnWNWaH\",\"type\":\"card\",\"data\":{\"card_name\":\"Setting\",\"col\":4}}]",
+ "content": "[{\"id\":\"QkMPwUchpk\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">BPJS</span>\",\"col\":12}},{\"id\":\"BS553GrgVu\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Dashboard Antrean\",\"col\":6}},{\"id\":\"7EnR3THuxg\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Antrean</b></span>\",\"col\":12}},{\"id\":\"S3l0GMSVFH\",\"type\":\"card\",\"data\":{\"card_name\":\"Antrean\",\"col\":4}},{\"id\":\"YzNZ3_OtCb\",\"type\":\"card\",\"data\":{\"card_name\":\"Reporting\",\"col\":4}},{\"id\":\"vPacz4FHv_\",\"type\":\"card\",\"data\":{\"card_name\":\"Referensi Antrean\",\"col\":4}},{\"id\":\"YUtoJbR9yM\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"4VSp59W8F2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>VClaim</b></span>\",\"col\":12}},{\"id\":\"-TmfMNXrVq\",\"type\":\"card\",\"data\":{\"card_name\":\"SEP\",\"col\":4}},{\"id\":\"TTRQygz8tP\",\"type\":\"card\",\"data\":{\"card_name\":\"Rujukan\",\"col\":4}},{\"id\":\"GcDOPZrsaq\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Setting</b></span>\",\"col\":12}},{\"id\":\"AYbfnWNWaH\",\"type\":\"card\",\"data\":{\"card_name\":\"Setting\",\"col\":4}}]",
  "creation": "2023-08-04 10:26:38.523653",
  "custom_blocks": [],
  "docstatus": 0,
@@ -108,9 +108,45 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "SEP",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "SEP",
+   "link_count": 0,
+   "link_to": "SEP",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Rujukan",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Rujukan",
+   "link_count": 0,
+   "link_to": "Rujukan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-08-05 13:06:32.065568",
+ "modified": "2023-08-08 09:27:09.027316",
  "modified_by": "Administrator",
  "module": "Setting",
  "name": "BPJS",

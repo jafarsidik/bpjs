@@ -1,6 +1,15 @@
 frappe.ready(function(frm) {
 	// bind events here
+	//buat ngeprint
+	//const w = window.open(
+	 	//"/printview?doctype={{doctype}}&name={{name}}&key={{key}}"
+		//"/printview?doctype=POS%20Invoice&name=ACC-PSINV-2023-00002&trigger_print=1&format=POS%20Invoice&no_letterhead=1&letterhead=null&_lang=en"
+		//);
+	//w.print();
 	
+
+
+
 	//Set Kode Booking
 	let kode_booking = generateUniqueBookingCode();
 	frappe.web_form.set_value('kode_booking',kode_booking);
@@ -133,15 +142,12 @@ frappe.ready(function(frm) {
 						indicator: 'green',
 						message:r.message.metaData.message,
 					});
-
-					// $("<iframe>")                             // create a new iframe element
-					// .hide()                               // make it invisible
-					// .attr("src", "printview?doctype=POS%20Invoice&name=ACC-PSINV-2023-00001&trigger_print=1&format=POS%20Invoice&no_letterhead=1&letterhead=null&_lang=en") // point the iframe to the page you want to print
-					// .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-					// const printWindow = window.open("", "_blank");
-					// printWindow.document.write('<img src="' + qrcode._el.firstChild.toDataURL() + '" />');
-					// printWindow.document.close();
-					// printWindow.print();
+					//const w = window.open(
+						//"/printview?doctype={{doctype}}&name={{name}}&key={{key}}"
+						//"/printview?doctype=POS%20Invoice&name=ACC-PSINV-2023-00002&trigger_print=1&format=POS%20Invoice&no_letterhead=1&letterhead=null&_lang=en"
+						//);
+					//w.print();
+					
 					return true
 				}else{
 					frappe.show_alert({
@@ -153,8 +159,7 @@ frappe.ready(function(frm) {
 				}
 			})
 		}
-		//window.print();
-		//return false;
+		
 	}
 })
 
