@@ -67,25 +67,25 @@ def execute(filters=None):
 					'nomorreferensi':x['nomorreferensi'],
 					'sumberdata':x['sumberdata'],
 				})
-	if filters is not None:
-		res = sendAntrean(service ='antrean/pendaftaran/tanggal/'+today(),method="GET")
-		if res['response'] is not None:
-			for x in res['response']:
-				data_store.append({
-					'kodebooking':x['kodebooking'],
-					'noantrean':x['noantrean'],
-					'status':x['status'],
-					'tanggal':x['tanggal'],
-					'kodepoli':x['kodepoli'],
-					'kodedokter':x['kodedokter'],
-					'jampraktek':x['jampraktek'],
-					'nik':x['nik'],
-					'nokapst':x['nokapst'],
-					'nohp':x['nohp'],
-					'norekammedis':x['norekammedis'],
-					'jeniskunjungan':x['jeniskunjungan'],
-					'nomorreferensi':x['nomorreferensi'],
-					'sumberdata':x['sumberdata'],
-				})
+	# if filters is not None:
+	# 	res = sendAntrean(service ='antrean/pendaftaran/tanggal/'+today(),method="GET")
+	# 	if res['response'] is not None:
+	# 		for x in res['response']:
+	# 			data_store.append({
+	# 				'kodebooking':x['kodebooking'],
+	# 				'noantrean':x['noantrean'],
+	# 				'status':x['status'],
+	# 				'tanggal':x['tanggal'],
+	# 				'kodepoli':x['kodepoli'],
+	# 				'kodedokter':x['kodedokter'],
+	# 				'jampraktek':x['jampraktek'],
+	# 				'nik':x['nik'],
+	# 				'nokapst':x['nokapst'],
+	# 				'nohp':x['nohp'],
+	# 				'norekammedis':x['norekammedis'],
+	# 				'jeniskunjungan':x['jeniskunjungan'],
+	# 				'nomorreferensi':x['nomorreferensi'],
+	# 				'sumberdata':x['sumberdata'],
+	# 			})
 		
 	return columns, data_store

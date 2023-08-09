@@ -20,6 +20,7 @@
   "kode_poli",
   "jadwal_dokter",
   "column_break_etous",
+  "status_task_id",
   "noantrian",
   "angka_antrian",
   "qrcode",
@@ -37,6 +38,7 @@
   "jampraktek",
   "kapasitaspasien",
   "task_list_tab",
+  "section_break_tal9y",
   "task_id",
   "is_farmasi",
   "column_break_el7i9",
@@ -58,6 +60,8 @@
   {
    "fieldname": "tanggalperiksa",
    "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
    "label": "Tanggal Periksa",
    "reqd": 1
   },
@@ -183,7 +187,6 @@
    "label": "Task Name"
   },
   {
-   "description": "- Alur Task Id Pasien Baru: 1-2-3-4-5 (apabila ada obat tambah 6-7)<br>\n- Alur Task Id Pasien Lama: 3-4-5 (apabila ada obat tambah 6-7)<br>\n- Sisa antrean berkurang pada task 5<br>\n- Pemanggilan antrean poli pasien muncul pada task 4<br>\n- Cek in/mulai waktu tunggu untuk pasien baru mulai pada task 1<br>\n- Cek in/mulai waktu tunggu untuk pasien lama mulai pada task 3<br>\n- Agar terdapat validasi pada sistem RS agar alur pengiriman Task Id berurutan dari awal, dan waktu Task Id yang kecil lebih dulu daripada Task Id yang besar (misal task Id 1=08.00, task Id 2= 08.05)<br>\n- jenisresep : Tidak ada/Racikan/Non racikan (jenisresep khusus untuk rs yang sudah implementasi antrean farmasi. Jika belum/tidak kolom jenisresep dapat dihilangkan)",
    "fieldname": "section_break_v3l6w",
    "fieldtype": "Section Break"
   },
@@ -227,12 +230,27 @@
    "fieldname": "qrcode",
    "fieldtype": "HTML",
    "label": "QR Code"
+  },
+  {
+   "description": "- Alur Task Id Pasien Baru: 1-2-3-4-5 (apabila ada obat tambah 6-7)<br>\n- Alur Task Id Pasien Lama: 3-4-5 (apabila ada obat tambah 6-7)<br>\n- Sisa antrean berkurang pada task 5<br>\n- Pemanggilan antrean poli pasien muncul pada task 4<br>\n- Cek in/mulai waktu tunggu untuk pasien baru mulai pada task 1<br>\n- Cek in/mulai waktu tunggu untuk pasien lama mulai pada task 3<br>\n- Agar terdapat validasi pada sistem RS agar alur pengiriman Task Id berurutan dari awal, dan waktu Task Id yang kecil lebih dulu daripada Task Id yang besar (misal task Id 1=08.00, task Id 2= 08.05)<br>\n- jenisresep : Tidak ada/Racikan/Non racikan (jenisresep khusus untuk rs yang sudah implementasi antrean farmasi. Jika belum/tidak kolom jenisresep dapat dihilangkan)",
+   "fieldname": "section_break_tal9y",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status_task_id",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Status Task ID",
+   "read_only": 1
   }
  ],
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-07 09:55:45.466777",
+ "modified": "2023-08-08 13:43:57.869549",
  "modified_by": "Administrator",
  "module": "Antrean",
  "name": "Antrean BPJS",

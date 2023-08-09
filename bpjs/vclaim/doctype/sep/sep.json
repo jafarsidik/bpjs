@@ -1,0 +1,445 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:sep",
+ "creation": "2023-08-07 19:25:45.012799",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "formulir_sep_tab",
+  "section_break_lxqbf",
+  "tglsep",
+  "jnspelayanan",
+  "ppkpelayanan",
+  "column_break_o2ae1",
+  "nosurat",
+  "kodedpjp",
+  "dpjplayan",
+  "data_diagnosa_awal_pasien_section",
+  "nokartu",
+  "nomr",
+  "notelp",
+  "diagnosa_awal__pasien_column",
+  "diagawal",
+  "katarak",
+  "catatan",
+  "kelas_rawat_section",
+  "klsrawathak",
+  "cob",
+  "column_break_na3mb",
+  "klsrawatnaik",
+  "pembiayaan",
+  "penanggungjawab",
+  "data_rujukan_section",
+  "asalrujukan",
+  "tglrujukan",
+  "column_break_h11qz",
+  "norujukan",
+  "ppkrujukan",
+  "data_poli_tujuan_section",
+  "tujuan",
+  "column_break_urzuk",
+  "eksekutif",
+  "data_jaminan_section",
+  "laka_lantas_column",
+  "lakalantas",
+  "nolp",
+  "tglkejadian",
+  "keterangan",
+  "suplesi_column",
+  "suplesi",
+  "nosepsuplesi",
+  "lokasi_laka_column",
+  "kdpropinsi",
+  "kdkabupaten",
+  "kdkecamatan",
+  "kunjungan_section",
+  "tujuankunj",
+  "flagprocedure",
+  "column_break_ehizp",
+  "kdpenunjang",
+  "assesmentpel",
+  "data_sep_tab",
+  "section_break_uxvao",
+  "sep",
+  "norujukan_respon"
+ ],
+ "fields": [
+  {
+   "fieldname": "nokartu",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No BPJS",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "tglsep",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Tanggal SEP",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "0112R027 | RS. Dr. Suyoto",
+   "fieldname": "ppkpelayanan",
+   "fieldtype": "Data",
+   "label": "PPK Pelayanan",
+   "read_only": 1
+  },
+  {
+   "description": "jenis pelayanan = 1. r.inap 2. r.jalan",
+   "fieldname": "jnspelayanan",
+   "fieldtype": "Select",
+   "label": "Jenis Pelayanan",
+   "options": "\n1\n2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kelas_rawat_section",
+   "fieldtype": "Section Break",
+   "label": "Data Kelas Rawat"
+  },
+  {
+   "description": "sesuai kelas rawat peserta, 1. Kelas 1, 2. Kelas 2, 3. Kelas 3",
+   "fieldname": "klsrawathak",
+   "fieldtype": "Select",
+   "label": "Kelas Rawat Hak",
+   "options": "\n1\n2\n3",
+   "read_only": 1
+  },
+  {
+   "description": "diisi jika naik kelas rawat, 1. VVIP, 2. VIP, 3. Kelas 1, 4. Kelas 2, 5. Kelas 3, 6. ICCU, 7. ICU, 8. Diatas Kelas 1",
+   "fieldname": "klsrawatnaik",
+   "fieldtype": "Select",
+   "label": "Kelas Rawat naik",
+   "options": "\n1\n2\n3\n4\n5\n6\n7\n8"
+  },
+  {
+   "description": "1. Pribadi, 2. Pemberi Kerja, 3. Asuransi Kesehatan Tambahan. diisi jika naik kelas rawat",
+   "fieldname": "pembiayaan",
+   "fieldtype": "Select",
+   "label": "Pembiayaan",
+   "options": "\n1\n2\n3"
+  },
+  {
+   "description": "Contoh: jika pembiayaan 1 maka penanggungJawab=Pribadi. diisi jika naik kelas rawat",
+   "fieldname": "penanggungjawab",
+   "fieldtype": "Data",
+   "label": "Penanggung Jawab"
+  },
+  {
+   "fieldname": "nomr",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "No MR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "data_rujukan_section",
+   "fieldtype": "Section Break",
+   "label": "Data Rujukan"
+  },
+  {
+   "description": "asal rujukan ->1.Faskes 1, 2. Faskes 2(RS)",
+   "fieldname": "asalrujukan",
+   "fieldtype": "Select",
+   "label": "Asal Rujukan",
+   "options": "\n1\n2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tglrujukan",
+   "fieldtype": "Date",
+   "label": "Tanggal Rujukan",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_h11qz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "norujukan",
+   "fieldtype": "Data",
+   "label": "No Rujukan",
+   "read_only": 1
+  },
+  {
+   "description": "kode faskes rujukam -> baca di referensi faskes",
+   "fieldname": "ppkrujukan",
+   "fieldtype": "Data",
+   "label": "PPK Rujukan",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_lxqbf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "catatan",
+   "fieldtype": "Data",
+   "label": "Catatan Peserta",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "{katarak --> 0.Tidak 1.Ya}",
+   "fieldname": "katarak",
+   "fieldtype": "Check",
+   "label": "Katarak",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "cob -> 0.Tidak Unchecked 1. Ya Checked",
+   "fieldname": "cob",
+   "fieldtype": "Check",
+   "label": "COB",
+   "read_only": 1
+  },
+  {
+   "fieldname": "data_poli_tujuan_section",
+   "fieldtype": "Section Break",
+   "label": "Data Poli Tujuan"
+  },
+  {
+   "fieldname": "tujuan",
+   "fieldtype": "Data",
+   "label": "Poli Tujuan",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "poli eksekutif -> 0. Tidak 1.Ya",
+   "fieldname": "eksekutif",
+   "fieldtype": "Check",
+   "label": "Poli Executive",
+   "read_only": 1
+  },
+  {
+   "fieldname": "data_diagnosa_awal_pasien_section",
+   "fieldtype": "Section Break",
+   "label": "Data Pasien"
+  },
+  {
+   "fieldname": "column_break_o2ae1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "data_jaminan_section",
+   "fieldtype": "Section Break",
+   "label": "Data Jaminan"
+  },
+  {
+   "description": "0 : Bukan Kecelakaan lalu lintas [BKLL], 1 : KLL dan bukan kecelakaan Kerja [BKK], 2 : KLL dan KK, 3 : KK",
+   "fieldname": "lakalantas",
+   "fieldtype": "Select",
+   "label": "Laka Lantas",
+   "options": "0\n1\n2\n3"
+  },
+  {
+   "fieldname": "nolp",
+   "fieldtype": "Data",
+   "label": "No Laporan"
+  },
+  {
+   "fieldname": "tglkejadian",
+   "fieldtype": "Date",
+   "label": "Tanggal Kejadian"
+  },
+  {
+   "fieldname": "keterangan",
+   "fieldtype": "Data",
+   "label": "Keterangan Kejadian"
+  },
+  {
+   "fieldname": "suplesi_column",
+   "fieldtype": "Column Break",
+   "label": "Suplesi"
+  },
+  {
+   "description": "{Suplesi --> 0.Tidak 1. Ya}",
+   "fieldname": "suplesi",
+   "fieldtype": "Select",
+   "label": "Suplesi",
+   "options": "\n0\n1"
+  },
+  {
+   "description": "No.SEP yang Jika Terdapat Suplesi",
+   "fieldname": "nosepsuplesi",
+   "fieldtype": "Data",
+   "label": "No SEP Suplesi"
+  },
+  {
+   "fieldname": "lokasi_laka_column",
+   "fieldtype": "Column Break",
+   "label": "Lokasi Laka"
+  },
+  {
+   "fieldname": "kdpropinsi",
+   "fieldtype": "Select",
+   "label": "Provinsi"
+  },
+  {
+   "fieldname": "kdkabupaten",
+   "fieldtype": "Select",
+   "label": "Kabupaten"
+  },
+  {
+   "fieldname": "kdkecamatan",
+   "fieldtype": "Select",
+   "label": "Kecamatan"
+  },
+  {
+   "fieldname": "laka_lantas_column",
+   "fieldtype": "Column Break",
+   "label": "Laka Lantas"
+  },
+  {
+   "fieldname": "kunjungan_section",
+   "fieldtype": "Section Break",
+   "label": "Kunjungan"
+  },
+  {
+   "default": "0",
+   "description": "{\"0\": Normal,  \"1\": Prosedur,  \"2\": Konsul Dokter}",
+   "fieldname": "tujuankunj",
+   "fieldtype": "Select",
+   "label": "Tujuan Kunjungan",
+   "options": "0\n1\n2"
+  },
+  {
+   "description": "{\"0\": Prosedur Tidak Berkelanjutan, \"1\": Prosedur dan Terapi Berkelanjutan} ==> diisi \"\" jika tujuanKunj = \"0\",",
+   "fieldname": "flagprocedure",
+   "fieldtype": "Select",
+   "label": "Flag Prosedude",
+   "options": "\n0\n1"
+  },
+  {
+   "description": "{\"1\": Radioterapi, \n                                \"2\": Kemoterapi, \n                                \"3\": Rehabilitasi Medik, \n                                \"4\": Rehabilitasi Psikososial, \n                                \"5\": Transfusi Darah, \n                                \"6\": Pelayanan Gigi, \n                                \"7\": Laboratorium, \n                                \"8\": USG, \n                                \"9\": Farmasi, \n                                \"10\": Lain-Lain, \n                                \"11\": MRI, \n                                \"12\": HEMODIALISA}\n==> diisi \"\" jika tujuanKunj = \"0\"",
+   "fieldname": "kdpenunjang",
+   "fieldtype": "Select",
+   "label": "Kode Penunjang",
+   "options": "\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12"
+  },
+  {
+   "description": "{\"1\": Poli spesialis tidak tersedia pada hari sebelumnya, \n                                 \"2\": Jam Poli telah berakhir pada hari sebelumnya, \n                                 \"3\": Dokter Spesialis yang dimaksud tidak praktek pada hari sebelumnya, \n                                 \"4\": Atas Instruksi RS} ==> diisi jika tujuanKunj = \"2\" atau \"0\" (politujuan beda dengan poli rujukan dan hari beda),\n                                 \"5\": Tujuan Kontrol",
+   "fieldname": "assesmentpel",
+   "fieldtype": "Select",
+   "label": "Assesment Pelayanan",
+   "options": "\n1\n2\n3\n4\n5"
+  },
+  {
+   "fieldname": "nosurat",
+   "fieldtype": "Data",
+   "label": "No Surat SKDP",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kodedpjp",
+   "fieldtype": "Select",
+   "label": "Kode DPJP",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dpjplayan",
+   "fieldtype": "Select",
+   "label": "DPJP Layanan"
+  },
+  {
+   "fieldname": "formulir_sep_tab",
+   "fieldtype": "Tab Break",
+   "label": "Formulir SEP"
+  },
+  {
+   "fieldname": "data_sep_tab",
+   "fieldtype": "Tab Break",
+   "label": "Data SEP"
+  },
+  {
+   "fieldname": "sep",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "SEP",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_uxvao",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "norujukan_respon",
+   "fieldtype": "Data",
+   "label": "No Rujukan",
+   "read_only": 1
+  },
+  {
+   "description": "diagnosa awal ICD10 ",
+   "fieldname": "diagawal",
+   "fieldtype": "Data",
+   "label": "Diagnosa Awal",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_urzuk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "notelp",
+   "fieldtype": "Data",
+   "label": "No Telepon",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_na3mb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "diagnosa_awal__pasien_column",
+   "fieldtype": "Column Break",
+   "label": "Diagnosa Awal  Pasien"
+  },
+  {
+   "fieldname": "column_break_ehizp",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-08-08 10:12:14.532647",
+ "modified_by": "Administrator",
+ "module": "VClaim",
+ "name": "SEP",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}
